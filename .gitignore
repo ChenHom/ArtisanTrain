@@ -1,2 +1,6 @@
-vendor/**
-.vscode/**
+vendor
+.vscode
+src/Command
+!src/Command/stub
+!src/Command/CreateUserCommand.php
+!src/Command/MakeCmdCommand.php
