@@ -1,0 +1,20 @@
+{
+    "name": "homchem/artisan-train",
+    "require": {
+        "symfony/console": "^4.1",
+        "illuminate/config": "^5.6",
+        "vlucas/phpdotenv": "^2.5",
+        "illuminate/filesystem": "^5.6"
+    },
+    "authors": [
+        {
+            "name": "Hom Chem",
+            "email": "homchem@Homde-MacBook-Pro.local"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ArtisanTrain\\" : "src\\"
+        }
+    }
+}
