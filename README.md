@@ -1,0 +1,2 @@
+# ArtisanTrain
+php artisan train
