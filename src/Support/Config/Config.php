@@ -17,7 +17,6 @@ class Config extends Repository
         foreach ($fileSystem->allFiles($path) as $file) {
             $relativePathName = $file->getRelativePathname();
             $pathInfo = pathinfo($relativePathName);
-            // var_dump($pathInfo);
             if($pathInfo['dirname'] == '.') {
                 $key = $pathInfo['filename'];
             } else {

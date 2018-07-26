@@ -7,6 +7,9 @@ use Symfony\Component\Console\Application as BaseApplication;
 
 class Application extends BaseApplication
 {
+
+    protected $basePath;
+
     protected $config;
 
     /**
@@ -16,13 +19,14 @@ class Application extends BaseApplication
 
     protected $environment;
 
-    public function __construct(string $name = 'ArtisanTrian', string $version = '0.0.1')
+    public function __construct(string $path, string $name = 'ArtisanTrian', string $version = '0.0.1')
     {
+        $this->basePath = $path;
         $this->config = new Config();
         $this->fileSystem = new Filesystem();
         $this->environment = $this->getEnvironment();
-        $this->config->loadConfigFiles(__DIR__ . '/Config');
-        $this->loadCommand(__DIR__ . '/Command');
+        $this->config->loadConfigFiles($path . '/src/Config');
+        $this->loadCommand($path . '/src/Command');
 
         parent::__construct($name);
     }
@@ -30,14 +34,14 @@ class Application extends BaseApplication
     public function getEnvironment()
     {
         $environment = '';
-        $environmentPath = __DIR__ . '/../.env';
+        $environmentPath = $this->basePath . '/../.env';
 
         if ($this->fileSystem->isFile($environmentPath)) {
             $environment = trim($this->fileSystem->get($environmentPath));
-            $environmentFile = __DIR__ . "/../.{$environment}";
+            $environmentFile = $this->basePath . "/../.{$environment}";
 
             if ($this->fileSystem->isFile($environmentFile . '.env')) {
-                $dotEnv = new \Dotenv\Dotenv(__DIR__ . "/../", ".{$environment}.env");
+                $dotEnv = new \Dotenv\Dotenv($this->basePath . "/../", ".{$environment}.env");
                 $dotEnv->load();
             }
         }
