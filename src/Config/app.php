@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'test' => getenv('TEST')
+    'test' => getenv('TEST'),
 ];

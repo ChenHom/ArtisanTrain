@@ -2,5 +2,5 @@
 <?php
 include_once __DIR__ . "/vendor/autoload.php";
 
-$a = new \ArtisanTrain\Application(realpath(__DIR__));
+$a = new \ArtisanTrain\Application(realpath(__DIR__) . '/src');
 $a->run();

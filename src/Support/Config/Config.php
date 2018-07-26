@@ -9,7 +9,7 @@ class Config extends Repository
     public function loadConfigFiles($path)
     {
         $fileSystem = new Filesystem();
-
+        // $configPath = $path
         if (! $fileSystem->isDirectory($path)) {
             return false;
         }

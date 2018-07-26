@@ -21,27 +21,26 @@ class Application extends BaseApplication
 
     public function __construct(string $path, string $name = 'ArtisanTrian', string $version = '0.0.1')
     {
-        $this->basePath = $path;
         $this->config = new Config();
         $this->fileSystem = new Filesystem();
-        $this->environment = $this->getEnvironment();
-        $this->config->loadConfigFiles($path . '/src/Config');
-        $this->loadCommand($path . '/src/Command');
+        $this->environment = $this->getEnvironment($path);
+        $this->config->loadConfigFiles($path . '/Config');
+        $this->loadCommand($path . '/Command');
 
         parent::__construct($name);
     }
 
-    public function getEnvironment()
+    protected function getEnvironment($path)
     {
         $environment = '';
-        $environmentPath = $this->basePath . '/../.env';
+        $environmentPath = $path . '/.env';
 
         if ($this->fileSystem->isFile($environmentPath)) {
             $environment = trim($this->fileSystem->get($environmentPath));
-            $environmentFile = $this->basePath . "/../.{$environment}";
+            $environmentFile = $path . "/.{$environment}";
 
             if ($this->fileSystem->isFile($environmentFile . '.env')) {
-                $dotEnv = new \Dotenv\Dotenv($this->basePath . "/../", ".{$environment}.env");
+                $dotEnv = new \Dotenv\Dotenv($path . "/", ".{$environment}.env");
                 $dotEnv->load();
             }
         }
