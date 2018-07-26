@@ -58,8 +58,10 @@ class Application extends BaseApplication
             $relativePathName = $file->getRelativePathname();
 
             $pathInfo = pathinfo($relativePathName);
-            $commandName = "\\ArtisanTrain\\Command\\{$pathInfo['filename']}";
-            $commands[] = new $commandName;
+            if ($pathInfo['dirname'] === '.') {
+                $commandName = "\\ArtisanTrain\\Command\\{$pathInfo['filename']}";
+                $commands[] = new $commandName;
+            }
         }
 
         if(!empty($commands)) {
